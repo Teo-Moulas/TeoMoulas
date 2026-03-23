@@ -54,7 +54,11 @@
         /* Frontpage Preview Lines */
         .preview-line { width: 90%; max-width: 1200px; margin-top: 40px; }
         .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
-        .preview-grid img, .preview-grid iframe { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); }
+        .preview-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); }
+        
+        /* YouTube Thumbnail specific for front page */
+        .yt-thumb { position: relative; cursor: pointer; }
+        .yt-thumb i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 2rem; opacity: 0.8; }
 
         /* Section Styling */
         section { padding: 80px 10%; }
@@ -85,7 +89,7 @@
 
         @media (max-width: 768px) {
             .contact-flex, .preview-grid { grid-template-columns: 1fr; }
-            .preview-grid iframe, .preview-grid img { height: 220px; }
+            .preview-grid img { height: 220px; }
         }
     </style>
 </head>
@@ -112,7 +116,7 @@
         </div>
 
         <div class="preview-line">
-            <p style="text-align:left; font-size: 0.8rem; text-transform:uppercase; color:#777;">Recent Performances</p>
+            <p style="text-align:left; font-size: 0.8rem; text-transform:uppercase; color:#777;">Recent Video Highlights</p>
             <div class="preview-grid" id="hp-video-line"></div>
         </div>
     </header>
@@ -181,7 +185,6 @@
             }
         }
 
-        // --- Data Logic ---
         let photos = JSON.parse(localStorage.getItem('teo_pics')) || [];
         let videos = JSON.parse(localStorage.getItem('teo_vids')) || [];
 
@@ -217,9 +220,16 @@
 
             // Homepage Preview (3 items)
             document.getElementById('hp-photo-line').innerHTML = photos.slice(0,3).map(p => `<img src="${p}">`).join('');
-            document.getElementById('hp-video-line').innerHTML = videos.slice(0,3).map(v => `<iframe src="https://www.youtube.com/embed/${v.id}"></iframe>`).join('');
+            
+            // Homepage Videos showing YouTube thumbnails automatically
+            document.getElementById('hp-video-line').innerHTML = videos.slice(0,3).map(v => `
+                <div class="yt-thumb" onclick="window.location.href='#portfolio'">
+                    <img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/${v.id}/0.jpg'">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            `).join('');
 
-            // Main Sections
+            // Full Grids
             document.getElementById('photo-grid').innerHTML = photos.map((p, i) => `
                 <div class="img-wrap">
                     ${isAdmin ? `<button class="del-btn" style="display:block" onclick="deleteItem('p',${i})">X</button>` : ''}
@@ -228,7 +238,7 @@
 
             document.getElementById('video-grid').innerHTML = videos.map((v, i) => `
                 <div class="yt-card">
-                    <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
+                    <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
                     <div style="padding:10px;">
                         ${isAdmin ? `<button onclick="deleteItem('v',${i})" style="float:right; background:red; border:none; color:white; padding:2px 5px;">Del</button>` : ''}
                         <h3>${v.title || 'Performance'}</h3>
