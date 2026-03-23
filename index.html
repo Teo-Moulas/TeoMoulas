@@ -19,17 +19,24 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: var(--light-text); line-height: 1.6; }
 
-        /* Navigation - Mobile Ready */
+        /* Navigation - Logo is now Gold */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 5%; background: rgba(0,0,0,0.95);
             position: fixed; width: 100%; z-index: 1000; border-bottom: 1px solid #222;
         }
+        .logo { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.5rem; 
+            color: var(--gold); 
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
         .nav-links { list-style: none; display: flex; align-items: center; }
         .nav-links li { margin-left: 20px; }
         .nav-links a { text-decoration: none; color: white; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
 
-        /* Animated Title */
+        /* Animated Title - Now explicitly Gold */
         .animated-name {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3rem, 10vw, 6rem);
@@ -38,8 +45,8 @@
             animation: glow 3s ease-in-out infinite alternate;
         }
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
-            to { text-shadow: 0 0 30px rgba(212, 175, 55, 0.6); transform: scale(1.02); }
+            from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); transform: scale(1); }
+            to { text-shadow: 0 0 35px rgba(212, 175, 55, 0.7); transform: scale(1.02); }
         }
 
         header {
@@ -49,45 +56,55 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        /* Admin UI Boxes */
+        /* Admin/Save Boxes */
         .admin-box {
             display: none; background: #111; padding: 20px; border: 1px dashed var(--gold);
             border-radius: 10px; margin-bottom: 30px;
         }
         .admin-box input, .admin-box textarea {
-            width: 100%; padding: 10px; margin: 5px 0; background: #000; color: white; border: 1px solid #333;
-        }
-        .save-btn {
-            background: var(--gold); color: black; border: none; padding: 10px 20px; 
-            font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 10px;
+            width: 100%; padding: 12px; margin: 8px 0; background: #000; color: white; border: 1px solid #333; border-radius: 5px;
         }
 
-        /* Gallery Grid - Responsive Block Size */
+        .save-btn {
+            background: var(--gold); color: black; border: none; padding: 12px 25px; 
+            font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 10px;
+            transition: 0.3s; width: 100%; text-transform: uppercase;
+        }
+        .save-btn:hover { background: #fff; }
+
         section { padding: 80px 10%; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 30px; font-size: 2.5rem; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .img-wrap { position: relative; height: 350px; overflow: hidden; border-radius: 10px; border: 1px solid #222; }
-        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .del-btn { 
-            position: absolute; top: 10px; right: 10px; background: red; color: white; 
-            border: none; padding: 5px 10px; cursor: pointer; display: none; z-index: 10;
+            position: absolute; top: 10px; right: 10px; background: #ff4444; color: white; 
+            border: none; padding: 8px 12px; cursor: pointer; display: none; z-index: 10; border-radius: 5px;
         }
 
-        /* Video Cards */
         .yt-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
         .yt-card iframe { width: 100%; height: 250px; border: none; }
-        .yt-info { padding: 15px; }
 
-        /* Contact & Socials */
+        /* Booking Form */
+        .booking-form { display: flex; flex-direction: column; gap: 12px; }
+        .booking-form input, .booking-form textarea, .booking-form select {
+            padding: 12px; background: #111; border: 1px solid #333; color: white; border-radius: 5px; font-family: inherit;
+        }
+        .form-row { display: flex; gap: 10px; }
+        .form-row input { flex: 1; }
+
         .contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .social-icons a { color: var(--gold); font-size: 2rem; margin-right: 20px; transition: 0.3s; }
+        .social-icons a:hover { color: #fff; }
         .whatsapp-btn { color: #25d366 !important; }
 
         footer { text-align: center; padding: 40px; background: #050505; border-top: 1px solid #222; }
 
         @media (max-width: 768px) {
             .contact-flex { grid-template-columns: 1fr; }
-            .nav-links li { margin-left: 10px; }
-            .nav-links a { font-size: 0.65rem; }
+            .form-row { flex-direction: column; }
+            .nav-links { display: flex; } /* Ensuring links stay visible for mobile menu */
         }
     </style>
 </head>
@@ -99,15 +116,15 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#fotos">Gallery</a></li>
             <li><a href="#portfolio">Videos</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="javascript:void(0)" onclick="handleLogin()" id="lock-icon"><i class="fas fa-lock"></i></a></li>
+            <li><a href="#contact">Bookings</a></li>
+            <li><a href="javascript:void(0)" onclick="handleLogin()" id="lock-icon" style="color:var(--gold)"><i class="fas fa-lock"></i></a></li>
         </ul>
     </nav>
 
     <header id="home">
         <h1 class="animated-name">Teo Moulas</h1>
-        <p style="letter-spacing: 5px; color: var(--gold);">GREEK & GLOBAL MUSICIAN</p>
-        <div class="social-icons" style="margin-top: 20px;" id="header-socials">
+        <p style="letter-spacing: 5px; color: var(--gold); font-weight: 600;">GREEK & GLOBAL MUSICIAN</p>
+        <div class="social-icons" style="margin-top: 20px;">
             <a href="#" id="link-fb"><i class="fab fa-facebook"></i></a>
             <a href="#" id="link-ig"><i class="fab fa-instagram"></i></a>
             <a href="https://wa.me/31687996179" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
@@ -118,9 +135,8 @@
         <h2>Gallery</h2>
         <div class="admin-box" id="admin-gallery">
             <h3>Upload Photo</h3>
-            <input type="file" id="fileInput" accept="image/*" style="border:none;">
-            <p><small>Or paste URL:</small></p>
-            <input type="text" id="imgUrlInput" placeholder="https://...">
+            <input type="file" id="fileInput" accept="image/*">
+            <input type="text" id="imgUrlInput" placeholder="Or paste Image URL...">
             <button class="save-btn" onclick="addPhoto()">SAVE TO GALLERY</button>
         </div>
         <div class="grid" id="photo-grid"></div>
@@ -129,8 +145,8 @@
     <section id="portfolio" style="background:#080808">
         <h2>Videos</h2>
         <div class="admin-box" id="admin-video">
-            <h3>Add YouTube Video</h3>
-            <input type="text" id="vidId" placeholder="Video ID (e.g. dQw4w9WgXcQ)">
+            <h3>Add YouTube Highlight</h3>
+            <input type="text" id="vidId" placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)">
             <input type="text" id="vidTitle" placeholder="Video Title">
             <textarea id="vidDesc" placeholder="Description..."></textarea>
             <button class="save-btn" onclick="addVideo()">SAVE VIDEO</button>
@@ -139,26 +155,50 @@
     </section>
 
     <section id="contact">
-        <h2>Contact & Socials</h2>
+        <h2>Bookings & Socials</h2>
+        
         <div class="admin-box" id="admin-socials">
-            <h3>Edit Social Links</h3>
-            <input type="text" id="inp-fb" placeholder="Facebook Profile URL">
-            <input type="text" id="inp-ig" placeholder="Instagram Profile URL">
+            <h3>Edit Profile Links</h3>
+            <input type="text" id="inp-fb" placeholder="Facebook URL">
+            <input type="text" id="inp-ig" placeholder="Instagram URL">
             <button class="save-btn" onclick="saveSocials()">UPDATE LINKS</button>
         </div>
 
         <div class="contact-flex">
-            <div>
-                <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" style="display:flex; flex-direction:column; gap:10px;">
-                    <input type="text" name="name" placeholder="Your Name" required style="padding:15px; background:#111; border:1px solid #333; color:white;">
-                    <textarea name="message" placeholder="Booking Details" rows="5" style="padding:15px; background:#111; border:1px solid #333; color:white;"></textarea>
-                    <button type="submit" class="save-btn">SEND EMAIL</button>
+            <div class="booking-form">
+                <h3 style="margin-bottom:10px;">Reservation Form</h3>
+                <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" class="booking-form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Website Booking - Teo Moulas">
+
+                    <div class="form-row">
+                        <input type="text" name="First Name" placeholder="First Name" required>
+                        <input type="text" name="Surname" placeholder="Surname" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                        <input type="tel" name="phone" placeholder="Mobile / Telefoon" required>
+                    </div>
+
+                    <input type="text" name="Address or Company" placeholder="Address or Company Name (Optional)">
+                    
+                    <div style="display:flex; flex-direction:column;">
+                        <label style="font-size: 0.8rem; color: var(--gold); margin-bottom:5px;">Select Event Date:</label>
+                        <input type="date" name="Booking Date" required>
+                    </div>
+
+                    <textarea name="message" placeholder="Message / Event details..." rows="4"></textarea>
+                    
+                    <button type="submit" class="save-btn">CONFIRM & SEND</button>
                 </form>
             </div>
-            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <p>Reach me directly on WhatsApp:</p>
-                <a href="https://wa.me/31687996179" class="social-icons whatsapp-btn" style="font-size:4rem;"><i class="fab fa-whatsapp"></i></a>
-                <p style="margin-top:20px;">Email: moulas20@gmail.com</p>
+
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+                <p>Direct WhatsApp Contact:</p>
+                <a href="https://wa.me/31687996179" class="social-icons whatsapp-btn" style="font-size:5rem;"><i class="fab fa-whatsapp"></i></a>
+                <p style="margin-top:20px;">Email: <strong>moulas20@gmail.com</strong></p>
+                <p style="font-size: 0.8rem; color:#555; margin-top:10px;">The Netherlands | Available Worldwide</p>
             </div>
         </div>
     </section>
@@ -173,14 +213,18 @@
 
         function handleLogin() {
             if(isAdmin) {
-                localStorage.setItem('teo_logged', 'false');
-                location.reload();
+                if(confirm("Logout from admin?")) {
+                    localStorage.setItem('teo_logged', 'false');
+                    location.reload();
+                }
             } else {
                 let p = prompt("Password:");
                 if(p === "teo2026") {
                     localStorage.setItem('teo_logged', 'true');
                     isAdmin = true;
                     showAdmin();
+                } else {
+                    alert("Wrong password.");
                 }
             }
         }
@@ -188,80 +232,90 @@
         function showAdmin() {
             if(!isAdmin) return;
             document.querySelectorAll('.admin-box').forEach(b => b.style.display = 'block');
-            document.querySelectorAll('.del-btn').forEach(b => b.style.display = 'block');
-            document.getElementById('lock-icon').innerHTML = '<i class="fas fa-unlock"></i>';
+            document.querySelectorAll('.del-btn').forEach(b => b.style.display = 'inline-block');
+            document.getElementById('lock-icon').innerHTML = '<i class="fas fa-unlock"></i> Logout';
         }
 
         // --- Gallery Logic ---
         let photos = JSON.parse(localStorage.getItem('teo_pics')) || [];
-
         function addPhoto() {
             const file = document.getElementById('fileInput').files[0];
             const url = document.getElementById('imgUrlInput').value;
-
             if(file) {
                 const reader = new FileReader();
                 reader.onload = (e) => savePhoto(e.target.result);
                 reader.readAsDataURL(file);
-            } else if(url) {
-                savePhoto(url);
-            }
+            } else if(url) { savePhoto(url); }
         }
-
         function savePhoto(src) {
             photos.unshift(src);
             localStorage.setItem('teo_pics', JSON.stringify(photos));
             location.reload();
         }
-
         function deletePhoto(index) {
-            photos.splice(index, 1);
-            localStorage.setItem('teo_pics', JSON.stringify(photos));
-            location.reload();
+            if(confirm("Delete this photo permanently?")) {
+                photos.splice(index, 1);
+                localStorage.setItem('teo_pics', JSON.stringify(photos));
+                location.reload();
+            }
         }
 
         // --- Video Logic ---
         let videos = JSON.parse(localStorage.getItem('teo_vids')) || [];
         function addVideo() {
-            const video = { id: document.getElementById('vidId').value, title: document.getElementById('vidTitle').value, desc: document.getElementById('vidDesc').value };
-            videos.unshift(video);
-            localStorage.setItem('teo_vids', JSON.stringify(videos));
-            location.reload();
+            const video = { 
+                id: document.getElementById('vidId').value, 
+                title: document.getElementById('vidTitle').value, 
+                desc: document.getElementById('vidDesc').value 
+            };
+            if(video.id) {
+                videos.unshift(video);
+                localStorage.setItem('teo_vids', JSON.stringify(videos));
+                location.reload();
+            }
         }
         function deleteVideo(index) {
-            videos.splice(index, 1);
-            localStorage.setItem('teo_vids', JSON.stringify(videos));
-            location.reload();
+            if(confirm("Remove this video?")) {
+                videos.splice(index, 1);
+                localStorage.setItem('teo_vids', JSON.stringify(videos));
+                location.reload();
+            }
         }
 
         // --- Social Logic ---
         function saveSocials() {
             localStorage.setItem('teo_fb', document.getElementById('inp-fb').value);
             localStorage.setItem('teo_ig', document.getElementById('inp-ig').value);
+            alert("Social links updated!");
             location.reload();
         }
 
-        // --- Render Everything ---
         window.onload = () => {
             const pGrid = document.getElementById('photo-grid');
-            pGrid.innerHTML = photos.map((p, i) => `
-                <div class="img-wrap">
-                    <button class="del-btn" onclick="deletePhoto(${i})">X</button>
-                    <img src="${p}">
-                </div>
-            `).join('');
+            if(photos.length === 0) pGrid.innerHTML = "<p style='color:#555'>Gallery is empty. Login to add photos.</p>";
+            else {
+                pGrid.innerHTML = photos.map((p, i) => `
+                    <div class="img-wrap">
+                        <button class="del-btn" onclick="deletePhoto(${i})"><i class="fas fa-trash"></i></button>
+                        <img src="${p}">
+                    </div>
+                `).join('');
+            }
 
             const vGrid = document.getElementById('video-grid');
-            vGrid.innerHTML = videos.map((v, i) => `
-                <div class="yt-card">
-                    <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
-                    <div class="yt-info">
-                        ${isAdmin ? `<button onclick="deleteVideo(${i})" style="background:red; color:white; border:none; float:right;">Delete</button>` : ''}
-                        <h3>${v.title}</h3>
-                        <p>${v.desc}</p>
+            if(videos.length === 0) vGrid.innerHTML = "<p style='color:#555'>No videos added yet.</p>";
+            else {
+                vGrid.innerHTML = videos.map((v, i) => `
+                    <div class="yt-card">
+                        <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
+                        <div style="padding:15px;">
+                            ${isAdmin ? `<button onclick="deleteVideo(${i})" style="background:red; color:white; border:none; padding:5px 10px; float:right; cursor:pointer; border-radius:3px;">Delete</button>` : ''}
+                            <h3 style="color:var(--gold)">${v.title}</h3>
+                            <p style="font-size:0.9rem; margin-top:5px;">${v.desc}</p>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
 
             document.getElementById('link-fb').href = localStorage.getItem('teo_fb') || '#';
             document.getElementById('link-ig').href = localStorage.getItem('teo_ig') || '#';
