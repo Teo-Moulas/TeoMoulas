@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEO MOULAS | Modern Greek Legend</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --gold: #c5a059;
-            --gold-light: #f1d592;
+            --gold-light: #e0c38c;
             --bg-deep: #050505;
-            --glass: rgba(10, 10, 10, 0.85);
-            --text-main: #ffffff;
+            --accent-gray: #1a1a1a;
+            --text-main: #f5f5f5;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -26,205 +26,246 @@
             overflow-x: hidden;
         }
 
-        /* --- Global Parallax --- */
-        .parallax-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
-                        url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-position: center;
-            z-index: -1; transform: translateZ(0);
-        }
-
-        /* --- Navigation --- */
+        /* --- UI Elements --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 5%; background: rgba(0,0,0,0.98);
-            position: fixed; width: 100%; z-index: 5000;
-            border-bottom: 2px solid var(--gold);
+            padding: 25px 5%; background: rgba(0,0,0,0.95);
+            position: fixed; width: 100%; z-index: 2000;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
             backdrop-filter: blur(15px);
         }
         .logo { 
-            font-family: 'Playfair Display', serif; font-size: 1.6rem; 
-            color: var(--gold); font-weight: 700; letter-spacing: 5px; text-decoration: none;
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.6rem; color: var(--gold); 
+            font-weight: 700; letter-spacing: 5px; 
+            text-decoration: none;
         }
         .nav-links { list-style: none; display: flex; align-items: center; }
-        .nav-links li { margin-left: 30px; }
+        .nav-links li { margin-left: 35px; }
         .nav-links a { 
             text-decoration: none; color: #fff; font-size: 0.7rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 3px; 
-            transition: 0.5s;
+            font-weight: 400; text-transform: uppercase; letter-spacing: 3px; 
+            transition: 0.5s; opacity: 0.7;
         }
-        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover { opacity: 1; color: var(--gold); }
 
-        /* --- Hero --- */
-        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; }
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), var(--bg-deep)), 
+                        url('https://images.unsplash.com/photo-1520522186717-219b7a794799?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 10%;
+        }
+
         .hero-title {
-            font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 12vw, 8.5rem);
-            color: var(--gold); text-transform: uppercase; line-height: 0.9; margin-bottom: 20px;
-        }
-        .master-desc {
-            max-width: 800px; background: var(--glass); padding: 30px;
-            border: 1px solid var(--gold); border-radius: 4px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            font-size: 1.1rem; letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 15vw, 9rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         }
 
-        /* --- UI Global --- */
-        section { padding: 100px 5%; position: relative; }
-        .section-label { text-align: center; color: var(--gold); font-size: 0.7rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 15px; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; text-align: center; margin-bottom: 60px; color: #fff; }
-
-        /* --- Discography --- */
-        .disco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .album-card { 
-            background: #111; padding: 25px; border: 1px solid #222; 
-            transition: 0.5s; text-align: center; perspective: 1000px;
+        @keyframes tracking-in-expand {
+            0% { letter-spacing: -0.5em; opacity: 0; }
+            40% { opacity: 0.6; }
+            100% { opacity: 1; }
         }
-        .album-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 15px 35px rgba(197, 160, 89, 0.2); }
-        .album-art { width: 100%; aspect-ratio: 1/1; object-fit: cover; margin-bottom: 20px; border: 1px solid #333; }
 
-        /* --- Tour Grid --- */
-        .tour-row { 
-            display: grid; grid-template-columns: 1fr 2fr 1fr 1fr; 
-            background: var(--glass); padding: 25px; margin-bottom: 10px; 
-            border-left: 4px solid var(--gold); align-items: center;
+        .hero-subtitle {
+            font-size: 0.8rem; letter-spacing: 8px; text-transform: uppercase;
+            color: #888; margin-bottom: 40px; font-weight: 300;
         }
-        .tour-btn { padding: 12px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.7rem; text-align: center; font-weight: 800; transition: 0.3s; }
-        .tour-btn:hover { background: var(--gold); color: #000; }
+
+        /* --- Ultra Bio Section --- */
+        .bio-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            max-width: 1200px; margin: -100px auto 100px;
+            position: relative; z-index: 10; padding: 0 5%;
+        }
+        .bio-card {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 50px; border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-top: 3px solid var(--gold);
+        }
+        .bio-card h3 { 
+            font-family: 'Playfair Display', serif; font-size: 2rem; 
+            margin-bottom: 20px; color: var(--gold);
+        }
+        .bio-card p { font-weight: 300; color: #ccc; font-size: 0.95rem; }
+
+        /* --- Ultra Gallery --- */
+        .section-label { 
+            text-align: center; color: var(--gold); font-size: 0.7rem; 
+            letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px;
+        }
+        section h2 { 
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; 
+            text-align: center; margin-bottom: 60px;
+        }
+
+        .ultra-grid { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 20px; padding: 0 5%;
+        }
+        .ultra-item { 
+            height: 450px; position: relative; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.6s all cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: #000;
+        }
+        .ultra-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s ease; }
+        .ultra-item:hover img { transform: scale(1.1); filter: brightness(0.7); }
+        .ultra-item:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
 
         /* --- Booking Form --- */
-        .booking-box { max-width: 850px; margin: 0 auto; background: var(--glass); padding: 60px; border: 1px solid var(--gold); }
-        .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .booking-section { background: #0a0a0a; border-top: 1px solid #111; border-bottom: 1px solid #111; }
+        .booking-wrap { 
+            max-width: 800px; margin: 0 auto; 
+            background: var(--bg-deep); padding: 70px;
+            border: 1px solid var(--accent-gray);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
+        .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .booking-grid input, .booking-grid textarea {
-            background: #000; border: 1px solid #333; color: #fff; padding: 18px; 
-            font-family: 'Montserrat'; font-weight: 700; font-size: 0.95rem;
+            background: transparent; border: none; border-bottom: 1px solid #333;
+            color: #fff; padding: 15px 0; font-family: 'Montserrat';
+            font-size: 0.9rem; transition: 0.4s;
         }
-        .booking-grid input::placeholder, .booking-grid textarea::placeholder { color: #fff; text-transform: uppercase; opacity: 1; }
-        .btn-ultra { 
-            grid-column: span 2; width: 100%; background: var(--gold); color: #000; padding: 25px; 
-            border: none; font-weight: 900; letter-spacing: 6px; cursor: pointer; text-transform: uppercase; transition: 0.4s;
+        .booking-grid input:focus, .booking-grid textarea:focus { border-bottom-color: var(--gold); }
+        .full { grid-column: span 2; }
+        
+        .btn-ultra {
+            grid-column: span 2; background: var(--gold); color: #000;
+            border: none; padding: 25px; font-weight: 700; cursor: pointer;
+            letter-spacing: 5px; text-transform: uppercase; margin-top: 40px;
+            transition: 0.5s;
         }
-        .btn-ultra:hover { background: #fff; transform: scale(1.02); }
+        .btn-ultra:hover { background: #fff; transform: translateY(-3px); }
 
-        /* --- Admin Panel --- */
-        .admin-panel { display: none; background: #151515; padding: 40px; border: 2px dashed var(--gold); margin: 20px 0; }
+        /* --- Socials --- */
+        .social-footer { text-align: center; padding: 100px 5%; }
+        .social-link-icon { 
+            font-size: 2.5rem; color: #fff; margin: 0 30px; 
+            transition: 0.4s; opacity: 0.4;
+        }
+        .social-link-icon:hover { color: var(--gold); opacity: 1; transform: scale(1.2); }
+        
+        .whatsapp-vip {
+            display: inline-block; margin-top: 50px;
+            color: var(--gold); text-decoration: none; font-weight: 600;
+            border: 1px solid var(--gold); padding: 20px 50px;
+            letter-spacing: 4px; font-size: 0.8rem; transition: 0.5s;
+        }
+        .whatsapp-vip:hover { background: var(--gold); color: #000; }
 
-        /* --- Footer --- */
-        footer { text-align: center; padding: 100px 5% 40px; background: #000; }
-        .social-link { font-size: 2rem; color: var(--gold); margin: 0 20px; transition: 0.3s; }
-        .social-link:hover { color: #fff; transform: scale(1.2); }
-        .copy-tag { margin-top: 60px; font-size: 0.75rem; letter-spacing: 5px; opacity: 0.6; font-weight: 800; text-transform: uppercase; color: #fff; }
+        .admin-panel { display: none; background: #111; padding: 40px; border: 1px solid var(--gold); margin: 20px 5%; }
 
         @media (max-width: 800px) {
-            .tour-row, .booking-grid { grid-template-columns: 1fr; text-align: center; }
+            .bio-container, .booking-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 4.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="parallax-bg" id="parallax"></div>
-
     <nav>
         <a href="#" class="logo">T. MOULAS</a>
         <ul class="nav-links">
             <li><a href="#home">Artist</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#tour">Live</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#video">Music</a></li>
             <li><a href="#book">Booking</a></li>
-            <li><a href="javascript:void(0)" onclick="openGate()"><i class="fas fa-fingerprint" id="gateIcon" style="color:var(--gold)"></i></a></li>
+            <li><a href="javascript:void(0)" onclick="openGate()"><i class="fas fa-lock" id="gateIcon" style="color:var(--gold)"></i></a></li>
         </ul>
     </nav>
 
     <header id="home">
-        <div class="section-label">LEGACY • VIRTUE • PASSION</div>
+        <div class="hero-subtitle">Singer • Pianist • Composer</div>
         <h1 class="hero-title">Teo Moulas</h1>
-        <div class="master-desc">
-            <p>Teo Moulas is a distinguished Greek musician and composer, specializing in the raw emotional genres of <strong>Entexna</strong> and <strong>Laika</strong>. Bridging traditional Hellenic roots with modern global arrangements, he creates a cinematic journey of the soul.</p>
-        </div>
+        <p style="letter-spacing: 3px; font-weight: 200; color: #888;">Modern Greek Musical Journey</p>
     </header>
 
-    <section id="music">
-        <div class="section-label">Audio & Cinema</div>
-        <h2>Selected Works</h2>
-        
+    <div class="bio-container">
+        <div class="bio-card">
+            <h3>The Musician</h3>
+            <p>A master of <strong>Entexna</strong> and <strong>Laika</strong>, Teo Moulas blends the raw emotional power of Greek heritage with the sophisticated arrangements of a world-class pianist.</p>
+        </div>
+        <div class="bio-card" style="border-top-color: #555;">
+            <h3>The Culture</h3>
+            <p>From private events to grand stages, Teo preserves the Mediterranean soul. His performances are more than just music; they are a bridge between history and the modern era.</p>
+        </div>
+    </div>
+
+    <section id="gallery">
+        <div class="section-label">Selected Works</div>
+        <h2>Visual Gallery</h2>
+        <div class="admin-panel" id="photoAdmin">
+            <input type="text" id="imgInp" placeholder="Enter Photo URL" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold);">
+            <button onclick="saveImg()" class="btn-ultra" style="padding:10px;">ADD TO COLLECTION</button>
+        </div>
+        <div class="ultra-grid" id="photoWrap"></div>
+    </section>
+
+    <section id="video" style="background: #020202;">
+        <div class="section-label">Cinema</div>
+        <h2>Performances</h2>
         <div class="admin-panel" id="vidAdmin">
-            <input type="text" id="vidInp" placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)">
-            <input type="text" id="vidTitle" placeholder="Song Title" style="margin-top:10px;">
-            <button onclick="saveVid()" class="btn-ultra" style="padding:15px; margin-top:15px;">ADD PERFORMANCE</button>
+            <input type="text" id="vidFullUrl" placeholder="Paste YouTube Link (e.g. https://www.youtube.com/watch?v=...)" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold); margin-bottom:10px;">
+            <input type="text" id="vidTitle" placeholder="Video Title" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold);">
+            <button onclick="saveVid()" class="btn-ultra" style="padding:10px;">PUBLISH VIDEO</button>
         </div>
-
-        <div class="disco-grid" id="vidWrap">
-            <div class="album-card">
-                <div style="background:#000; height:200px; display:flex; align-items:center; justify-content:center;">
-                    <i class="fas fa-play-circle fa-3x" style="color:var(--gold)"></i>
-                </div>
-                <h3 style="margin-top:20px; color:var(--gold)">LIVE STUDIO SESSIONS</h3>
-                <p style="font-size:0.7rem; letter-spacing:3px;">AVAILABLE ON YOUTUBE</p>
-            </div>
-        </div>
+        <div class="ultra-grid" id="vidWrap"></div>
     </section>
 
-    <section id="tour">
-        <div class="section-label">Live Appearances</div>
-        <h2>Tour Schedule</h2>
-
-        <div class="admin-panel" id="tourAdmin">
-            <input type="text" id="tDate" placeholder="Date (e.g. MAY 20)">
-            <input type="text" id="tVenue" placeholder="Venue">
-            <input type="text" id="tCity" placeholder="City">
-            <button onclick="saveTour()" class="btn-ultra" style="padding:15px; margin-top:15px;">ADD TOUR DATE</button>
-        </div>
-
-        <div id="tourWrap" style="max-width:1100px; margin:0 auto;">
-            </div>
-    </section>
-
-    <section id="book">
-        <div class="section-label">Concierge</div>
-        <h2>Private Booking</h2>
-        <div class="booking-box">
+    <section id="book" class="booking-section">
+        <div class="section-label">Reservation</div>
+        <h2>Inquire Now</h2>
+        <div class="booking-wrap">
             <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" class="booking-grid">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="text" name="Name" placeholder="NAME" required>
-                <input type="text" name="Surname" placeholder="SURNAME" required>
-                <input type="text" name="Location" placeholder="CITY / LOCATION" required class="full">
+                
+                <input type="text" name="Name" placeholder="FIRST NAME" required>
+                <input type="text" name="Surname" placeholder="LAST NAME" required>
+                <input type="text" name="Mobile" placeholder="MOBILE NUMBER" required>
+                <input type="text" name="Location" placeholder="EVENT LOCATION / CITY" required>
+                <input type="text" name="Company" placeholder="COMPANY NAME (OPTIONAL)" class="full">
                 <textarea name="Message" rows="5" placeholder="TELL TEO ABOUT YOUR EVENT" required class="full"></textarea>
-                <button type="submit" class="btn-ultra">SEND SECURE MESSAGE</button>
-            </form>
-        </div>
+                
+                <div class="full" style="display:flex; align-items:center; gap:15px; opacity:0.6;">
+                    <input type="checkbox" required style="width:20px; accent-color:var(--gold);">
+                    <label style="font-size:0.7rem; letter-spacing:2px;">VERIFYING: I AM NOT A ROBOT</label>
+                </div>
 
-        <div class="booking-box" style="margin-top:40px; padding:30px; text-align:center;">
-            <h3 style="color:var(--gold); letter-spacing:4px; margin-bottom:15px;">JOIN THE INNER CIRCLE</h3>
-            <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" style="display:flex; gap:10px;">
-                <input type="email" name="Mailing_List" placeholder="YOUR EMAIL" required style="margin:0; flex:1;">
-                <button type="submit" style="background:var(--gold); color:#000; border:none; padding:0 30px; font-weight:900; cursor:pointer;">JOIN</button>
+                <button type="submit" class="btn-ultra">SEND BOOKING REQUEST</button>
             </form>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-logo" style="font-family:'Playfair Display'; font-size:2rem; color:var(--gold); margin-bottom:40px; letter-spacing:10px;">TEO MOULAS</div>
-        <div class="social-links">
-            <a href="https://www.facebook.com/teo.moylas" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/teo_moulas_official/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+    <div class="social-footer">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/teo.moylas" target="_blank" class="social-link-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/teo_moulas_official/" target="_blank" class="social-link-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="social-link-icon"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p class="copy-tag">&copy; 2026 TEO MOULAS | ITGG Ioannis Giannakouris</p>
-    </footer>
+        
+        <a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="whatsapp-vip">
+            BOOK VIA WHATSAPP CONCIERGE
+        </a>
+        
+        <p style="margin-top: 80px; font-size: 0.6rem; letter-spacing: 5px; opacity: 0.3;">
+            &copy; 2026 TEO MOULAS | DESIGN BY GIANNIS GIANNAKOURIS @ITGG
+        </p>
+    </div>
 
     <script>
-        // Parallax Logic
-        window.addEventListener('scroll', () => {
-            document.getElementById('parallax').style.transform = `translateY(${window.pageYOffset * 0.4}px)`;
-        });
-
-        // Admin and Data Logic
         let teoState = localStorage.getItem('teo_auth') === 'true';
+        let pData = JSON.parse(localStorage.getItem('teo_p')) || [];
         let vData = JSON.parse(localStorage.getItem('teo_v')) || [];
-        let tData = JSON.parse(localStorage.getItem('teo_t')) || [
-            {d: "APR 15", v: "Megaron Concert Hall", c: "Athens, GR"},
-            {d: "MAY 02", v: "The Royal Theatre", c: "Amsterdam, NL"}
-        ];
 
         function openGate() {
             if(teoState) { localStorage.setItem('teo_auth', 'false'); location.reload(); }
@@ -233,23 +274,35 @@
             }
         }
 
-        function saveVid() {
-            const id = document.getElementById('vidInp').value;
-            const t = document.getElementById('vidTitle').value;
-            if(id) { vData.unshift({id, t}); update('teo_v', vData); }
+        // Extracts YouTube ID from any valid YouTube URL
+        function getYTID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        function saveTour() {
-            const d = document.getElementById('tDate').value;
-            const v = document.getElementById('tVenue').value;
-            const c = document.getElementById('tCity').value;
-            if(d && v) { tData.push({d, v, c}); update('teo_t', tData); }
+        function saveImg() {
+            const url = document.getElementById('imgInp').value;
+            if(url) { pData.unshift(url); update('teo_p', pData); }
+        }
+
+        function saveVid() {
+            const fullUrl = document.getElementById('vidFullUrl').value;
+            const title = document.getElementById('vidTitle').value;
+            const id = getYTID(fullUrl);
+            
+            if(id) { 
+                vData.unshift({id, t: title}); 
+                update('teo_v', vData); 
+            } else {
+                alert("Invalid YouTube Link. Please try again.");
+            }
         }
 
         function nuke(key, type, idx) {
             if(confirm("Confirm Removal?")) {
-                if(type==='v') vData.splice(idx, 1); else tData.splice(idx,1);
-                update(key, type==='v' ? vData : tData);
+                if(type==='p') pData.splice(idx, 1); else vData.splice(idx,1);
+                update(key, type==='p' ? pData : vData);
             }
         }
 
@@ -257,32 +310,30 @@
 
         window.onload = () => {
             if(teoState) {
+                document.getElementById('photoAdmin').style.display = 'block';
                 document.getElementById('vidAdmin').style.display = 'block';
-                document.getElementById('tourAdmin').style.display = 'block';
-                document.getElementById('gateIcon').className = "fas fa-fingerprint";
-                document.getElementById('gateIcon').style.color = "#fff";
+                document.getElementById('gateIcon').className = "fas fa-lock-open";
             }
 
-            // Render Videos
-            if(vData.length > 0) {
-                document.getElementById('vidWrap').innerHTML = vData.map((v, i) => `
-                    <div class="album-card">
-                        <iframe width="100%" height="220" src="https://www.youtube.com/embed/${v.id}" frameborder="0" allowfullscreen></iframe>
-                        <h3 style="margin-top:15px; color:var(--gold); font-size:1rem;">${v.t}</h3>
-                        ${teoState ? `<button onclick="nuke('teo_v','v',${i})" style="color:red; background:none; border:none; cursor:pointer; margin-top:10px;">REMOVE</button>` : ''}
-                    </div>
-                `).join('');
-            }
+            document.getElementById('photoWrap').innerHTML = pData.map((p, i) => `
+                <div class="ultra-item">
+                    <img src="${p}">
+                    ${teoState ? `<button onclick="nuke('teo_p','p',${i})" style="position:absolute;top:10px;right:10px;background:red;color:white;border:none;padding:5px;cursor:pointer;">DELETE</button>` : ''}
+                </div>
+            `).join('');
 
-            // Render Tour
-            document.getElementById('tourWrap').innerHTML = tData.map((t, i) => `
-                <div class="tour-row">
-                    <div style="font-weight:900; color:var(--gold);">${t.d}</div>
-                    <div style="font-family:'Playfair Display'; font-size:1.3rem;">${t.v}</div>
-                    <div style="opacity:0.6; font-size:0.7rem; letter-spacing:2px;">${t.c}</div>
-                    <div style="display:flex; gap:10px;">
-                        <a href="#" class="tour-btn">TICKETS</a>
-                        ${teoState ? `<button onclick="nuke('teo_t','t',${i})" style="background:red; color:white; border:none; padding:10px; cursor:pointer;">X</button>` : ''}
+            // Renders videos as high-quality thumbnails
+            document.getElementById('vidWrap').innerHTML = vData.map((v, i) => `
+                <div class="ultra-item">
+                    <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank">
+                        <img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg" alt="${v.t}">
+                        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white; font-size:3rem; opacity:0.7;">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </a>
+                    <div style="position:absolute; bottom:0; width:100%; background:rgba(0,0,0,0.8); padding:15px; display:flex; justify-content:space-between;">
+                        <span style="font-size:0.7rem; letter-spacing:2px; color:var(--gold); text-transform:uppercase;">${v.t}</span>
+                        ${teoState ? `<button onclick="nuke('teo_v','v',${i})" style="color:red; background:none; border:none; cursor:pointer; font-weight:bold;">DELETE</button>` : ''}
                     </div>
                 </div>
             `).join('');
