@@ -13,127 +13,81 @@
             --dark-bg: #0a0a0a;
             --card-bg: #1a1a1a;
             --light-text: #f4f4f4;
-            --accent: #1db954; 
-            --glass: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: var(--light-text); line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: var(--light-text); line-height: 1.6; }
 
-        /* Navigation */
+        /* Navigation - Mobile Ready */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: rgba(0,0,0,0.95);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid #222;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: rgba(0,0,0,0.95);
+            position: fixed; width: 100%; z-index: 1000; border-bottom: 1px solid #222;
+        }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links li { margin-left: 20px; }
+        .nav-links a { text-decoration: none; color: white; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+
+        /* Animated Title */
+        .animated-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
+            to { text-shadow: 0 0 30px rgba(212, 175, 55, 0.6); transform: scale(1.02); }
         }
 
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); letter-spacing: 2px; }
-
-        .nav-links { list-style: none; display: flex; align-items: center; }
-        .nav-links li { margin-left: 25px; }
-        .nav-links a { text-decoration: none; color: white; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
-
-        /* Hero Section */
         header {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        header h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 10px; }
-        header p { font-size: 1.1rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
-
-        /* Universal Section Styling */
-        section { padding: 100px 10%; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 30px; position: relative; }
-        h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin-top: 10px; }
-
-        /* Grid for Gallery */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        .grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; border: 1px solid #333; transition: 0.4s; }
-        .grid img:hover { transform: scale(1.03); border-color: var(--gold); }
-
-        /* Admin Panels inside Sections */
-        .admin-panel {
-            display: none; /* Controlled by JS */
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px dashed var(--gold);
-            border-radius: 12px;
+        /* Admin UI Boxes */
+        .admin-box {
+            display: none; background: #111; padding: 20px; border: 1px dashed var(--gold);
+            border-radius: 10px; margin-bottom: 30px;
+        }
+        .admin-box input, .admin-box textarea {
+            width: 100%; padding: 10px; margin: 5px 0; background: #000; color: white; border: 1px solid #333;
+        }
+        .save-btn {
+            background: var(--gold); color: black; border: none; padding: 10px 20px; 
+            font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 10px;
         }
 
-        .admin-panel h3 { color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase; }
-
-        .admin-form { display: flex; flex-direction: column; gap: 12px; }
-        .admin-form input, .admin-form textarea {
-            width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: white; border-radius: 8px; font-family: inherit;
+        /* Gallery Grid - Responsive Block Size */
+        section { padding: 80px 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .img-wrap { position: relative; height: 350px; overflow: hidden; border-radius: 10px; border: 1px solid #222; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .del-btn { 
+            position: absolute; top: 10px; right: 10px; background: red; color: white; 
+            border: none; padding: 5px 10px; cursor: pointer; display: none; z-index: 10;
         }
 
-        .admin-btn {
-            background: var(--gold); color: black; padding: 12px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.3s;
-        }
-        .admin-btn:hover { background: #fff; }
+        /* Video Cards */
+        .yt-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
+        .yt-card iframe { width: 100%; height: 250px; border: none; }
+        .yt-info { padding: 15px; }
 
-        /* Booking / Kontakt Template */
-        .booking-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #333;
-        }
+        /* Contact & Socials */
+        .contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .social-icons a { color: var(--gold); font-size: 2rem; margin-right: 20px; transition: 0.3s; }
+        .whatsapp-btn { color: #25d366 !important; }
 
-        .booking-form input, .booking-form select, .booking-form textarea {
-            width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #444; color: white; border-radius: 8px; font-family: inherit;
-        }
-
-        .booking-form button {
-            background: var(--gold); color: black; padding: 15px 30px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; text-transform: uppercase; width: 100%; transition: 0.3s;
-        }
-
-        .booking-form button:hover { background: #fff; }
-
-        .contact-info { display: flex; flex-direction: column; justify-content: center; }
-        .contact-method { margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
-        .contact-method i { font-size: 1.5rem; color: var(--gold); width: 30px; }
-
-        /* Hide Number Logic */
-        .hidden-number { background: #333; padding: 2px 8px; border-radius: 4px; cursor: pointer; color: var(--gold); font-size: 0.9rem; }
-
-        /* YouTube Styling */
-        .yt-card {
-            background: #000; padding: 40px; border-radius: 15px; text-align: center; border: 1px solid #333; transition: 0.3s; position: relative;
-        }
-        .yt-card:hover { border-color: red; }
-        .yt-card a { text-decoration: none; color: inherit; }
-
-        .delete-btn {
-            position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; display: none;
-        }
-
-        footer { text-align: center; padding: 60px 20px; background: #050505; border-top: 1px solid #222; }
-        .itgg-signature { margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+        footer { text-align: center; padding: 40px; background: #050505; border-top: 1px solid #222; }
 
         @media (max-width: 768px) {
-            .booking-container { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+            .contact-flex { grid-template-columns: 1fr; }
+            .nav-links li { margin-left: 10px; }
+            .nav-links a { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -145,248 +99,174 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#fotos">Gallery</a></li>
             <li><a href="#portfolio">Videos</a></li>
-            <li><a href="#contact">Bookings</a></li>
-            <li><a href="javascript:void(0)" onclick="toggleLogin()" style="color:var(--gold)" id="lock-btn"><i class="fas fa-lock"></i></a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="javascript:void(0)" onclick="handleLogin()" id="lock-icon"><i class="fas fa-lock"></i></a></li>
         </ul>
     </nav>
 
     <header id="home">
-        <h1>Teo Moulas</h1>
-        <p><i class="fas fa-music"></i> Musician & Composer <i class="fas fa-music"></i></p>
+        <h1 class="animated-name">Teo Moulas</h1>
+        <p style="letter-spacing: 5px; color: var(--gold);">GREEK & GLOBAL MUSICIAN</p>
+        <div class="social-icons" style="margin-top: 20px;" id="header-socials">
+            <a href="#" id="link-fb"><i class="fab fa-facebook"></i></a>
+            <a href="#" id="link-ig"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/31687996179" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </header>
 
     <section id="fotos">
-        <h2>Visual Journey</h2>
-
-        <div id="gallery-admin" class="admin-panel">
-            <h3><i class="fas fa-camera"></i> Add to Gallery</h3>
-            <div class="admin-form">
-                <input type="text" id="imgUrl" placeholder="Paste image link here (Unsplash, imgur, etc.)...">
-                <button class="admin-btn" onclick="addPhoto()">Add Photo</button>
-            </div>
+        <h2>Gallery</h2>
+        <div class="admin-box" id="admin-gallery">
+            <h3>Upload Photo</h3>
+            <input type="file" id="fileInput" accept="image/*" style="border:none;">
+            <p><small>Or paste URL:</small></p>
+            <input type="text" id="imgUrlInput" placeholder="https://...">
+            <button class="save-btn" onclick="addPhoto()">SAVE TO GALLERY</button>
         </div>
-
-        <div class="grid" id="photo-grid">
-            <img src="https://images.unsplash.com/photo-1514525253361-bee8718a340b?auto=format&fit=crop&w=500&q=60" alt="Live Performance">
-            <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=500&q=60" alt="Studio">
-            <img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?auto=format&fit=crop&w=500&q=60" alt="Concert">
-        </div>
+        <div class="grid" id="photo-grid"></div>
     </section>
 
-    <section id="portfolio" style="background: #0f0f0f;">
-        <h2>YouTube Highlights</h2>
-
-        <div id="video-admin" class="admin-panel">
-            <h3><i class="fab fa-youtube"></i> Add YouTube Feature</h3>
-            <div class="admin-form">
-                <input type="text" id="videoUrl" placeholder="YouTube Video URL link...">
-                <input type="text" id="videoTitle" placeholder="Video Title...">
-                <textarea id="videoDesc" rows="2" placeholder="Brief text description..."></textarea>
-                <button class="admin-btn" onclick="addVideo()">Link Video & Text</button>
-            </div>
+    <section id="portfolio" style="background:#080808">
+        <h2>Videos</h2>
+        <div class="admin-box" id="admin-video">
+            <h3>Add YouTube Video</h3>
+            <input type="text" id="vidId" placeholder="Video ID (e.g. dQw4w9WgXcQ)">
+            <input type="text" id="vidTitle" placeholder="Video Title">
+            <textarea id="vidDesc" placeholder="Description..."></textarea>
+            <button class="save-btn" onclick="addVideo()">SAVE VIDEO</button>
         </div>
-
-        <div class="grid" id="video-grid">
-            <div class="yt-card">
-                <a href="#" target="_blank">
-                    <i class="fab fa-youtube" style="font-size: 3.5rem; color: red;"></i>
-                    <h3 style="margin: 15px 0;">Greek Night Live</h3>
-                    <p><small>Experience the energy of Rebetiko and Modern Greek classics.</small></p>
-                </a>
-            </div>
-            <div class="yt-card">
-                <a href="#" target="_blank">
-                    <i class="fab fa-youtube" style="font-size: 3.5rem; color: red;"></i>
-                    <h3 style="margin: 15px 0;">Original Compositions</h3>
-                    <p><small>A collection of cinematic and global instrumental pieces.</small></p>
-                </a>
-            </div>
-        </div>
+        <div class="grid" id="video-grid"></div>
     </section>
 
     <section id="contact">
-        <h2>Reservations & Kontakt</h2>
-        <div class="booking-container">
-            <div class="booking-form">
-                <h3>Book Now</h3>
-                <p style="margin-bottom: 20px; font-size: 0.9rem;">Secure your date for events or studio sessions.</p>
-                <form>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <select>
-                        <option>Performance Booking</option>
-                        <option>Studio Collaboration</option>
-                        <option>Private Lessons</option>
-                    </select>
-                    <textarea rows="4" placeholder="Event Details & Date"></textarea>
-                    <button type="submit">Send Reservation</button>
+        <h2>Contact & Socials</h2>
+        <div class="admin-box" id="admin-socials">
+            <h3>Edit Social Links</h3>
+            <input type="text" id="inp-fb" placeholder="Facebook Profile URL">
+            <input type="text" id="inp-ig" placeholder="Instagram Profile URL">
+            <button class="save-btn" onclick="saveSocials()">UPDATE LINKS</button>
+        </div>
+
+        <div class="contact-flex">
+            <div>
+                <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" style="display:flex; flex-direction:column; gap:10px;">
+                    <input type="text" name="name" placeholder="Your Name" required style="padding:15px; background:#111; border:1px solid #333; color:white;">
+                    <textarea name="message" placeholder="Booking Details" rows="5" style="padding:15px; background:#111; border:1px solid #333; color:white;"></textarea>
+                    <button type="submit" class="save-btn">SEND EMAIL</button>
                 </form>
             </div>
-
-            <div class="contact-info">
-                <div class="contact-method">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <p><strong>Email</strong></p>
-                        <p>moulas20@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <i class="fab fa-whatsapp"></i>
-                    <div>
-                        <p><strong>WhatsApp</strong></p>
-                        <span class="hidden-number" id="wa-num" onclick="revealNumber()">Click to reveal number</span>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <p><strong>Location</strong></p>
-                        <p>The Netherlands | Available Worldwide</p>
-                    </div>
-                </div>
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                <p>Reach me directly on WhatsApp:</p>
+                <a href="https://wa.me/31687996179" class="social-icons whatsapp-btn" style="font-size:4rem;"><i class="fab fa-whatsapp"></i></a>
+                <p style="margin-top:20px;">Email: moulas20@gmail.com</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Teo Moulas Music. All Rights Reserved.</p>
-        <div class="itgg-signature">
-            Created by Giannis Giannakouris @ITGG
-        </div>
+        <p>&copy; 2026 TEO MOULAS MUSIC</p>
+        <div style="font-size:0.7rem; color:#444; margin-top:10px; letter-spacing:2px;">CREATED BY GIANNIS GIANNAKOURIS @ITGG</div>
     </footer>
 
     <script>
-        // Security: Reveal WhatsApp
-        function revealNumber() {
-            document.getElementById('wa-num').innerHTML = "+31 6 87996179";
-            document.getElementById('wa-num').style.cursor = "default";
-        }
+        let isAdmin = localStorage.getItem('teo_logged') === 'true';
 
-        // Global check for Teo Login
-        window.onload = function() {
-            if (localStorage.getItem("teo_logged_in") === "true") {
-                activateAdminUI();
-            }
-            loadStoredData();
-        };
-
-        function toggleLogin() {
-            if (localStorage.getItem("teo_logged_in") === "true") {
-                // Logout routine
-                localStorage.removeItem("teo_logged_in");
-                alert("Logged out successfully.");
-                window.location.reload();
-                return;
-            }
-
-            let pass = prompt("Admin Entry:");
-            if (pass === "teo2026") {
-                localStorage.setItem("teo_logged_in", "true");
-                activateAdminUI();
-                alert("Welcome back, Teo! Management panels are now open in Gallery and Videos.");
+        function handleLogin() {
+            if(isAdmin) {
+                localStorage.setItem('teo_logged', 'false');
+                location.reload();
             } else {
-                alert("Access Denied.");
+                let p = prompt("Password:");
+                if(p === "teo2026") {
+                    localStorage.setItem('teo_logged', 'true');
+                    isAdmin = true;
+                    showAdmin();
+                }
             }
         }
 
-        function activateAdminUI() {
-            document.getElementById('gallery-admin').style.display = 'block';
-            document.getElementById('video-admin').style.display = 'block';
-            document.getElementById('lock-btn').innerHTML = '<i class="fas fa-unlock"></i>';
-            
-            // Show delete buttons for stored contents
-            setTimeout(() => {
-                document.querySelectorAll('.delete-btn').forEach(btn => btn.style.display = 'block');
-            }, 500);
+        function showAdmin() {
+            if(!isAdmin) return;
+            document.querySelectorAll('.admin-box').forEach(b => b.style.display = 'block');
+            document.querySelectorAll('.del-btn').forEach(b => b.style.display = 'block');
+            document.getElementById('lock-icon').innerHTML = '<i class="fas fa-unlock"></i>';
         }
 
-        // Local Storage Aggregators
-        function loadStoredData() {
-            // Load Images
-            const images = JSON.parse(localStorage.getItem("teo_images") || "[]");
-            const photoGrid = document.getElementById('photo-grid');
-            images.forEach((imgSrc, index) => {
-                const wrapper = createWrapper(imgSrc, 'image', index);
-                photoGrid.prepend(wrapper);
-            });
-
-            // Load Videos
-            const videos = JSON.parse(localStorage.getItem("teo_videos") || "[]");
-            const videoGrid = document.getElementById('video-grid');
-            videos.forEach((vid, index) => {
-                const card = createVideoCard(vid.url, vid.title, vid.desc, index);
-                videoGrid.prepend(card);
-            });
-        }
-
-        function createWrapper(src, type, index) {
-            const div = document.createElement('div');
-            div.style.position = 'relative';
-            div.innerHTML = `
-                <img src="${src}">
-                <button class="delete-btn" onclick="deleteItem('${type}', ${index})" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; display: ${localStorage.getItem("teo_logged_in") === "true" ? 'block' : 'none'};"><i class="fas fa-trash"></i></button>
-            `;
-            return div;
-        }
-
-        function createVideoCard(url, title, desc, index) {
-            const div = document.createElement('div');
-            div.className = 'yt-card';
-            div.innerHTML = `
-                <button class="delete-btn" onclick="deleteItem('video', ${index})" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer; display: ${localStorage.getItem("teo_logged_in") === "true" ? 'block' : 'none'};"><i class="fas fa-trash"></i></button>
-                <a href="${url}" target="_blank">
-                    <i class="fab fa-youtube" style="font-size: 3.5rem; color: red;"></i>
-                    <h3 style="margin: 15px 0;">${title}</h3>
-                    <p><small>${desc}</small></p>
-                </a>
-            `;
-            return div;
-        }
+        // --- Gallery Logic ---
+        let photos = JSON.parse(localStorage.getItem('teo_pics')) || [];
 
         function addPhoto() {
-            const url = document.getElementById('imgUrl').value;
-            if (!url) return;
+            const file = document.getElementById('fileInput').files[0];
+            const url = document.getElementById('imgUrlInput').value;
 
-            let images = JSON.parse(localStorage.getItem("teo_images") || "[]");
-            images.push(url);
-            localStorage.setItem("teo_images", JSON.stringify(images));
-
-            document.getElementById('imgUrl').value = '';
-            window.location.reload(); // Hard reset to paint the UI
-        }
-
-        function addVideo() {
-            const url = document.getElementById('videoUrl').value;
-            const title = document.getElementById('videoTitle').value;
-            const desc = document.getElementById('videoDesc').value;
-
-            if (!url || !title) return alert("Fill in at least the Title and URL!");
-
-            let videos = JSON.parse(localStorage.getItem("teo_videos") || "[]");
-            videos.push({url, title, desc});
-            localStorage.setItem("teo_videos", JSON.stringify(videos));
-
-            document.getElementById('videoUrl').value = '';
-            document.getElementById('videoTitle').value = '';
-            document.getElementById('videoDesc').value = '';
-            window.location.reload();
-        }
-
-        function deleteItem(type, index) {
-            if (!confirm("Are you sure you want to delete this?")) return;
-
-            if (type === 'image') {
-                let images = JSON.parse(localStorage.getItem("teo_images") || "[]");
-                images.splice(index, 1);
-                localStorage.setItem("teo_images", JSON.stringify(images));
-            } else {
-                let videos = JSON.parse(localStorage.getItem("teo_videos") || "[]");
-                videos.splice(index, 1);
-                localStorage.setItem("teo_videos", JSON.stringify(videos));
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => savePhoto(e.target.result);
+                reader.readAsDataURL(file);
+            } else if(url) {
+                savePhoto(url);
             }
-            window.location.reload();
         }
+
+        function savePhoto(src) {
+            photos.unshift(src);
+            localStorage.setItem('teo_pics', JSON.stringify(photos));
+            location.reload();
+        }
+
+        function deletePhoto(index) {
+            photos.splice(index, 1);
+            localStorage.setItem('teo_pics', JSON.stringify(photos));
+            location.reload();
+        }
+
+        // --- Video Logic ---
+        let videos = JSON.parse(localStorage.getItem('teo_vids')) || [];
+        function addVideo() {
+            const video = { id: document.getElementById('vidId').value, title: document.getElementById('vidTitle').value, desc: document.getElementById('vidDesc').value };
+            videos.unshift(video);
+            localStorage.setItem('teo_vids', JSON.stringify(videos));
+            location.reload();
+        }
+        function deleteVideo(index) {
+            videos.splice(index, 1);
+            localStorage.setItem('teo_vids', JSON.stringify(videos));
+            location.reload();
+        }
+
+        // --- Social Logic ---
+        function saveSocials() {
+            localStorage.setItem('teo_fb', document.getElementById('inp-fb').value);
+            localStorage.setItem('teo_ig', document.getElementById('inp-ig').value);
+            location.reload();
+        }
+
+        // --- Render Everything ---
+        window.onload = () => {
+            const pGrid = document.getElementById('photo-grid');
+            pGrid.innerHTML = photos.map((p, i) => `
+                <div class="img-wrap">
+                    <button class="del-btn" onclick="deletePhoto(${i})">X</button>
+                    <img src="${p}">
+                </div>
+            `).join('');
+
+            const vGrid = document.getElementById('video-grid');
+            vGrid.innerHTML = videos.map((v, i) => `
+                <div class="yt-card">
+                    <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
+                    <div class="yt-info">
+                        ${isAdmin ? `<button onclick="deleteVideo(${i})" style="background:red; color:white; border:none; float:right;">Delete</button>` : ''}
+                        <h3>${v.title}</h3>
+                        <p>${v.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('link-fb').href = localStorage.getItem('teo_fb') || '#';
+            document.getElementById('link-ig').href = localStorage.getItem('teo_ig') || '#';
+            showAdmin();
+        };
     </script>
 </body>
 </html>
