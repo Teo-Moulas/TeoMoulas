@@ -1,343 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEO MOULAS | Modern Greek Legend</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --gold: #c5a059;
-            --gold-light: #e0c38c;
-            --bg-deep: #050505;
-            --accent-gray: #1a1a1a;
-            --text-main: #f5f5f5;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teo Moulas | Modern Greek Legend</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root {
+    --gold: #c5a059;
+    --gold-light: #e0c38c;
+    --bg-deep: #050505;
+    --accent-gray: #1a1a1a;
+    --text-main: #f5f5f5;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background: var(--bg-deep); 
-            color: var(--text-main); 
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+* { margin:0; padding:0; box-sizing:border-box; outline:none; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Montserrat', sans-serif; background: var(--bg-deep); color: var(--text-main); line-height:1.8; overflow-x:hidden; }
 
-        /* --- UI Elements --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 5%; background: rgba(0,0,0,0.95);
-            position: fixed; width: 100%; z-index: 2000;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-            backdrop-filter: blur(15px);
-        }
-        .logo { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.6rem; color: var(--gold); 
-            font-weight: 700; letter-spacing: 5px; 
-            text-decoration: none;
-        }
-        .nav-links { list-style: none; display: flex; align-items: center; }
-        .nav-links li { margin-left: 35px; }
-        .nav-links a { 
-            text-decoration: none; color: #fff; font-size: 0.7rem; 
-            font-weight: 400; text-transform: uppercase; letter-spacing: 3px; 
-            transition: 0.5s; opacity: 0.7;
-        }
-        .nav-links a:hover { opacity: 1; color: var(--gold); }
+/* Navigation */
+nav {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:25px 5%; background: rgba(0,0,0,0.95);
+    position:fixed; width:100%; z-index:2000;
+    border-bottom:1px solid rgba(197,160,89,0.2);
+    backdrop-filter:blur(15px);
+}
+.logo { font-family:'Playfair Display', serif; font-size:1.6rem; color:var(--gold); font-weight:700; letter-spacing:5px; text-decoration:none;}
+.nav-links { list-style:none; display:flex; align-items:center; }
+.nav-links li { margin-left:35px; }
+.nav-links a { text-decoration:none; color:#fff; font-size:0.9rem; font-weight:400; text-transform:uppercase; letter-spacing:2px; transition:0.5s; opacity:0.8; }
+.nav-links a:hover { opacity:1; color:var(--gold); }
 
-        /* --- Hero Section --- */
-        header {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), var(--bg-deep)), 
-                        url('https://images.unsplash.com/photo-1520522186717-219b7a794799?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 0 10%;
-        }
+/* Hero */
+header {
+    height:100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), var(--bg-deep)),
+        url('https://images.unsplash.com/photo-1511376777868-611b54f68947?auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+    padding:0 10%;
+}
+.hero-title {
+    font-family:'Playfair Display', serif;
+    font-size:clamp(3rem, 10vw, 8rem);
+    color: var(--gold);
+    text-transform:uppercase;
+    line-height:0.9;
+    margin-bottom:20px;
+    animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+@keyframes tracking-in-expand { 0%{letter-spacing:-0.5em;opacity:0;}40%{opacity:0.6;}100%{opacity:1;} }
+.hero-subtitle { font-size:1rem; letter-spacing:8px; text-transform:uppercase; color:#ccc; margin-bottom:20px; font-weight:300; }
+.hero-desc { font-size:1.1rem; color:#aaa; max-width:800px; text-align:center; line-height:1.6; }
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 15vw, 9rem);
-            color: var(--gold);
-            text-transform: uppercase;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-        }
+/* Bio */
+.bio-container {
+    display:grid; grid-template-columns:1fr 1fr; gap:60px;
+    max-width:1200px; margin:-80px auto 100px; position:relative; z-index:10; padding:0 5%;
+}
+.bio-card {
+    background: rgba(20,20,20,0.85);
+    padding:40px; border:1px solid rgba(255,255,255,0.05); backdrop-filter:blur(20px); border-top:3px solid var(--gold);
+}
+.bio-card h3 { font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:20px; color: var(--gold); }
+.bio-card p { font-weight:300; color:#ccc; font-size:1rem; }
 
-        @keyframes tracking-in-expand {
-            0% { letter-spacing: -0.5em; opacity: 0; }
-            40% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
+/* Gallery */
+.section-label { text-align:center; color: var(--gold); font-size:0.8rem; letter-spacing:8px; text-transform:uppercase; margin-bottom:20px; }
+section h2 { font-family:'Playfair Display', serif; font-size:2.8rem; text-align:center; margin-bottom:50px; }
+.ultra-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; padding:0 5%; }
+.ultra-item { height:350px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.05); transition:0.6s all cubic-bezier(0.165,0.84,0.44,1); background:#000; }
+.ultra-item img { width:100%; height:100%; object-fit:cover; transition:1.2s ease; }
+.ultra-item:hover img { transform:scale(1.1); filter:brightness(0.7); }
+.ultra-item:hover { border-color: var(--gold); box-shadow:0 0 30px rgba(197,160,89,0.2); }
 
-        .hero-subtitle {
-            font-size: 0.8rem; letter-spacing: 8px; text-transform: uppercase;
-            color: #888; margin-bottom: 40px; font-weight: 300;
-        }
+/* Booking */
+.booking-section { background:#0a0a0a; border-top:1px solid #111; border-bottom:1px solid #111; padding:60px 0; }
+.booking-wrap { max-width:800px; margin:0 auto; background: var(--bg-deep); padding:40px; border:1px solid var(--accent-gray); box-shadow:0 50px 100px rgba(0,0,0,0.8); }
+.booking-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.booking-grid input, .booking-grid textarea { background:transparent; border:none; border-bottom:1px solid #333; color:#fff; padding:12px 0; font-size:1rem; font-family:'Montserrat'; transition:0.4s; }
+.booking-grid input:focus, .booking-grid textarea:focus { border-bottom-color: var(--gold); }
+.full { grid-column:span 2; }
+.btn-ultra { grid-column:span 2; background: var(--gold); color:#000; border:none; padding:20px; font-weight:700; cursor:pointer; letter-spacing:3px; text-transform:uppercase; margin-top:20px; transition:0.5s; }
+.btn-ultra:hover { background:#fff; transform:translateY(-2px); }
 
-        /* --- Ultra Bio Section --- */
-        .bio-container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-            max-width: 1200px; margin: -100px auto 100px;
-            position: relative; z-index: 10; padding: 0 5%;
-        }
-        .bio-card {
-            background: rgba(20, 20, 20, 0.8);
-            padding: 50px; border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border-top: 3px solid var(--gold);
-        }
-        .bio-card h3 { 
-            font-family: 'Playfair Display', serif; font-size: 2rem; 
-            margin-bottom: 20px; color: var(--gold);
-        }
-        .bio-card p { font-weight: 300; color: #ccc; font-size: 0.95rem; }
+/* Social Footer */
+.social-footer { text-align:center; padding:60px 5%; }
+.social-link-icon { font-size:3rem; color:#fff; margin:0 20px; transition:0.4s; opacity:0.7; }
+.social-link-icon:hover { color: var(--gold); opacity:1; transform:scale(1.2); }
+.whatsapp-vip { display:inline-block; margin-top:30px; color: var(--gold); text-decoration:none; font-weight:600; border:1px solid var(--gold); padding:15px 40px; letter-spacing:3px; font-size:0.9rem; transition:0.5s; }
+.whatsapp-vip:hover { background:var(--gold); color:#000; }
 
-        /* --- Ultra Gallery --- */
-        .section-label { 
-            text-align: center; color: var(--gold); font-size: 0.7rem; 
-            letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px;
-        }
-        section h2 { 
-            font-family: 'Playfair Display', serif; font-size: 3.5rem; 
-            text-align: center; margin-bottom: 60px;
-        }
+.admin-panel { display:none; background:#111; padding:30px; border:1px solid var(--gold); margin:20px 5%; border-radius:10px; }
 
-        .ultra-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 20px; padding: 0 5%;
-        }
-        .ultra-item { 
-            height: 450px; position: relative; overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.6s all cubic-bezier(0.165, 0.84, 0.44, 1);
-            background: #000;
-        }
-        .ultra-item img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s ease; }
-        .ultra-item:hover img { transform: scale(1.1); filter: brightness(0.7); }
-        .ultra-item:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
-
-        /* --- Booking Form --- */
-        .booking-section { background: #0a0a0a; border-top: 1px solid #111; border-bottom: 1px solid #111; }
-        .booking-wrap { 
-            max-width: 800px; margin: 0 auto; 
-            background: var(--bg-deep); padding: 70px;
-            border: 1px solid var(--accent-gray);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-        }
-        .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .booking-grid input, .booking-grid textarea {
-            background: transparent; border: none; border-bottom: 1px solid #333;
-            color: #fff; padding: 15px 0; font-family: 'Montserrat';
-            font-size: 0.9rem; transition: 0.4s;
-        }
-        .booking-grid input:focus, .booking-grid textarea:focus { border-bottom-color: var(--gold); }
-        .full { grid-column: span 2; }
-        
-        .btn-ultra {
-            grid-column: span 2; background: var(--gold); color: #000;
-            border: none; padding: 25px; font-weight: 700; cursor: pointer;
-            letter-spacing: 5px; text-transform: uppercase; margin-top: 40px;
-            transition: 0.5s;
-        }
-        .btn-ultra:hover { background: #fff; transform: translateY(-3px); }
-
-        /* --- Socials --- */
-        .social-footer { text-align: center; padding: 100px 5%; }
-        .social-link-icon { 
-            font-size: 2.5rem; color: #fff; margin: 0 30px; 
-            transition: 0.4s; opacity: 0.4;
-        }
-        .social-link-icon:hover { color: var(--gold); opacity: 1; transform: scale(1.2); }
-        
-        .whatsapp-vip {
-            display: inline-block; margin-top: 50px;
-            color: var(--gold); text-decoration: none; font-weight: 600;
-            border: 1px solid var(--gold); padding: 20px 50px;
-            letter-spacing: 4px; font-size: 0.8rem; transition: 0.5s;
-        }
-        .whatsapp-vip:hover { background: var(--gold); color: #000; }
-
-        .admin-panel { display: none; background: #111; padding: 40px; border: 1px solid var(--gold); margin: 20px 5%; }
-
-        @media (max-width: 800px) {
-            .bio-container, .booking-grid { grid-template-columns: 1fr; }
-            .hero-title { font-size: 4.5rem; }
-        }
-    </style>
+/* Responsive */
+@media(max-width:900px){ .bio-container, .booking-grid{ grid-template-columns:1fr; } .hero-title{ font-size:4rem; } }
+@media(max-width:500px){ nav{flex-direction:column;} .nav-links{flex-direction:column; margin-top:15px;} .nav-links li{margin-left:0; margin-bottom:10px;} }
+</style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">T. MOULAS</a>
-        <ul class="nav-links">
-            <li><a href="#home">Artist</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#video">Music</a></li>
-            <li><a href="#book">Booking</a></li>
-            <li><a href="javascript:void(0)" onclick="openGate()"><i class="fas fa-lock" id="gateIcon" style="color:var(--gold)"></i></a></li>
-        </ul>
-    </nav>
+<nav>
+<a href="#" class="logo">T. MOULAS</a>
+<ul class="nav-links">
+<li><a href="#home">Artist</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#video">Music</a></li>
+<li><a href="#book">Booking</a></li>
+<li><a href="javascript:void(0)" onclick="openGate()"><i class="fas fa-lock" id="gateIcon" style="color:var(--gold)"></i></a></li>
+</ul>
+</nav>
 
-    <header id="home">
-        <div class="hero-subtitle">Singer • Pianist • Composer</div>
-        <h1 class="hero-title">Teo Moulas</h1>
-        <p style="letter-spacing: 3px; font-weight: 200; color: #888;">Modern Greek Musical Journey</p>
-    </header>
+<header id="home">
+<div class="hero-subtitle">Singer • Pianist • Composer</div>
+<h1 class="hero-title">Teo Moulas</h1>
+<p class="hero-desc">Modern Greek musical legend, master of Entexna and Laika. Bridging Greek tradition with contemporary piano, voice, and original compositions.</p>
+</header>
 
-    <div class="bio-container">
-        <div class="bio-card">
-            <h3>The Musician</h3>
-            <p>A master of <strong>Entexna</strong> and <strong>Laika</strong>, Teo Moulas blends the raw emotional power of Greek heritage with the sophisticated arrangements of a world-class pianist.</p>
-        </div>
-        <div class="bio-card" style="border-top-color: #555;">
-            <h3>The Culture</h3>
-            <p>From private events to grand stages, Teo preserves the Mediterranean soul. His performances are more than just music; they are a bridge between history and the modern era.</p>
-        </div>
-    </div>
+<div class="bio-container">
+<div class="bio-card">
+<h3>The Musician</h3>
+<p>Teo Moulas blends the raw emotional power of Greek heritage with sophisticated arrangements of a world-class pianist. From intimate concerts to grand stages, his music tells a story of passion and artistry.</p>
+</div>
+<div class="bio-card" style="border-top-color:#555;">
+<h3>The Culture</h3>
+<p>He performs across genres, from Entexna and Laika to modern Greek pieces. His shows preserve tradition while engaging global audiences with melodic creativity and heartfelt performances.</p>
+</div>
+</div>
 
-    <section id="gallery">
-        <div class="section-label">Selected Works</div>
-        <h2>Visual Gallery</h2>
-        <div class="admin-panel" id="photoAdmin">
-            <input type="text" id="imgInp" placeholder="Enter Photo URL" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold);">
-            <button onclick="saveImg()" class="btn-ultra" style="padding:10px;">ADD TO COLLECTION</button>
-        </div>
-        <div class="ultra-grid" id="photoWrap"></div>
-    </section>
+<section id="gallery">
+<div class="section-label">Selected Works</div>
+<h2>Visual Gallery</h2>
+<div class="admin-panel" id="photoAdmin">
+<input type="text" id="imgInp" placeholder="Enter Photo URL" style="width:100%; padding:12px; background:black; color:white; border:1px solid var(--gold); margin-bottom:10px;">
+<button onclick="saveImg()" class="btn-ultra">ADD TO COLLECTION</button>
+</div>
+<div class="ultra-grid" id="photoWrap"></div>
+</section>
 
-    <section id="video" style="background: #020202;">
-        <div class="section-label">Cinema</div>
-        <h2>Performances</h2>
-        <div class="admin-panel" id="vidAdmin">
-            <input type="text" id="vidFullUrl" placeholder="Paste YouTube Link (e.g. https://www.youtube.com/watch?v=...)" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold); margin-bottom:10px;">
-            <input type="text" id="vidTitle" placeholder="Video Title" style="width:100%; padding:15px; background:black; color:white; border:1px solid var(--gold);">
-            <button onclick="saveVid()" class="btn-ultra" style="padding:10px;">PUBLISH VIDEO</button>
-        </div>
-        <div class="ultra-grid" id="vidWrap"></div>
-    </section>
+<section id="video" style="background:#020202;">
+<div class="section-label">Cinema</div>
+<h2>Performances</h2>
+<div class="admin-panel" id="vidAdmin">
+<input type="text" id="vidFullUrl" placeholder="Paste YouTube Link" style="width:100%; padding:12px; background:black; color:white; border:1px solid var(--gold); margin-bottom:10px;">
+<input type="text" id="vidTitle" placeholder="Video Title" style="width:100%; padding:12px; background:black; color:white; border:1px solid var(--gold); margin-bottom:10px;">
+<button onclick="saveVid()" class="btn-ultra">PUBLISH VIDEO</button>
+</div>
+<div class="ultra-grid" id="vidWrap"></div>
+</section>
 
-    <section id="book" class="booking-section">
-        <div class="section-label">Reservation</div>
-        <h2>Inquire Now</h2>
-        <div class="booking-wrap">
-            <form action="https://formsubmit.co/moulas20@gmail.com" method="POST" class="booking-grid">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <input type="text" name="Name" placeholder="FIRST NAME" required>
-                <input type="text" name="Surname" placeholder="LAST NAME" required>
-                <input type="text" name="Mobile" placeholder="MOBILE NUMBER" required>
-                <input type="text" name="Location" placeholder="EVENT LOCATION / CITY" required>
-                <input type="text" name="Company" placeholder="COMPANY NAME (OPTIONAL)" class="full">
-                <textarea name="Message" rows="5" placeholder="TELL TEO ABOUT YOUR EVENT" required class="full"></textarea>
-                
-                <div class="full" style="display:flex; align-items:center; gap:15px; opacity:0.6;">
-                    <input type="checkbox" required style="width:20px; accent-color:var(--gold);">
-                    <label style="font-size:0.7rem; letter-spacing:2px;">VERIFYING: I AM NOT A ROBOT</label>
-                </div>
+<section id="book" class="booking-section">
+<div class="section-label">Reservation</div>
+<h2>Inquire Now</h2>
+<div class="booking-wrap">
+<form action="https://formsubmit.co/moulas20@gmail.com" method="POST" class="booking-grid">
+<input type="hidden" name="_captcha" value="false">
+<input type="text" name="Name" placeholder="FIRST NAME" required>
+<input type="text" name="Surname" placeholder="LAST NAME" required>
+<input type="text" name="Mobile" placeholder="MOBILE NUMBER" required>
+<input type="text" name="Location" placeholder="EVENT LOCATION / CITY" required>
+<input type="text" name="Company" placeholder="COMPANY NAME (OPTIONAL)" class="full">
+<textarea name="Message" rows="5" placeholder="TELL TEO ABOUT YOUR EVENT" required class="full"></textarea>
+<div class="full" style="display:flex; align-items:center; gap:10px; opacity:0.6;">
+<input type="checkbox" required style="width:20px; accent-color:var(--gold);">
+<label style="font-size:0.8rem; letter-spacing:1px;">VERIFYING: I AM NOT A ROBOT</label>
+</div>
+<button type="submit" class="btn-ultra">SEND BOOKING REQUEST</button>
+</form>
+</div>
+</section>
 
-                <button type="submit" class="btn-ultra">SEND BOOKING REQUEST</button>
-            </form>
-        </div>
-    </section>
+<div class="social-footer">
+<div class="social-icons">
+<a href="https://www.facebook.com/teo.moylas" target="_blank" class="social-link-icon"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/teo_moulas_official/" target="_blank" class="social-link-icon"><i class="fab fa-instagram"></i></a>
+<a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="social-link-icon"><i class="fab fa-whatsapp"></i></a>
+</div>
+<a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="whatsapp-vip">BOOK VIA WHATSAPP CONCIERGE</a>
+<p style="margin-top:50px; font-size:0.7rem; letter-spacing:3px; opacity:0.4;">&copy; 2026 TEO MOULAS | DESIGN BY GIANNIS GIANNAKOURIS @ITGG</p>
+</div>
 
-    <div class="social-footer">
-        <div class="social-icons">
-            <a href="https://www.facebook.com/teo.moylas" target="_blank" class="social-link-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/teo_moulas_official/" target="_blank" class="social-link-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="social-link-icon"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        
-        <a href="https://api.whatsapp.com/send?phone=31687996179" target="_blank" class="whatsapp-vip">
-            BOOK VIA WHATSAPP CONCIERGE
-        </a>
-        
-        <p style="margin-top: 80px; font-size: 0.6rem; letter-spacing: 5px; opacity: 0.3;">
-            &copy; 2026 TEO MOULAS | DESIGN BY GIANNIS GIANNAKOURIS @ITGG
-        </p>
-    </div>
+<script>
+let teoState = localStorage.getItem('teo_auth')==='true';
+let pData = JSON.parse(localStorage.getItem('teo_p'))||[];
+let vData = JSON.parse(localStorage.getItem('teo_v'))||[];
 
-    <script>
-        let teoState = localStorage.getItem('teo_auth') === 'true';
-        let pData = JSON.parse(localStorage.getItem('teo_p')) || [];
-        let vData = JSON.parse(localStorage.getItem('teo_v')) || [];
+function openGate(){
+    if(teoState){ localStorage.setItem('teo_auth','false'); location.reload(); }
+    else if(prompt("ACCESS CODE:")==="teo2026"){ localStorage.setItem('teo_auth','true'); location.reload(); }
+}
 
-        function openGate() {
-            if(teoState) { localStorage.setItem('teo_auth', 'false'); location.reload(); }
-            else if(prompt("ACCESS CODE:") === "teo2026") { 
-                localStorage.setItem('teo_auth', 'true'); location.reload(); 
-            }
-        }
+function getYTID(url){
+    const reg=/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match=url.match(reg);
+    return (match&&match[2].length===11)?match[2]:null;
+}
 
-        // Extracts YouTube ID from any valid YouTube URL
-        function getYTID(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
+function saveImg(){ const url=document.getElementById('imgInp').value; if(url){ pData.unshift(url); update('teo_p',pData); } }
+function saveVid(){ const url=document.getElementById('vidFullUrl').value; const t=document.getElementById('vidTitle').value; const id=getYTID(url); if(id){ vData.unshift({id,t}); update('teo_v',vData); } else{ alert("Invalid YouTube Link."); } }
+function nuke(k,type,i){ if(confirm("Confirm Removal?")){ if(type==='p') pData.splice(i,1); else vData.splice(i,1); update(k,type==='p'?pData:vData); } }
+function update(k,d){ localStorage.setItem(k,JSON.stringify(d)); location.reload(); }
 
-        function saveImg() {
-            const url = document.getElementById('imgInp').value;
-            if(url) { pData.unshift(url); update('teo_p', pData); }
-        }
+window.onload=()=>{
+if(teoState){ document.getElementById('photoAdmin').style.display='block'; document.getElementById('vidAdmin').style.display='block'; document.getElementById('gateIcon').className="fas fa-lock-open"; }
+document.getElementById('photoWrap').innerHTML=pData.map((p,i)=>`<div class="ultra-item"><img src="${p}">${teoState?`<button onclick="nuke('teo_p','p',${i})" style="position:absolute;top:10px;right:10px;background:red;color:white;border:none;padding:5px;cursor:pointer;">DELETE</button>`:''}</div>`).join('');
+document.getElementById('vidWrap').innerHTML=vData.map((v,i)=>`<div class="ultra-item"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg" alt="${v.t}"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;font-size:3rem;opacity:0.7;"><i class="fas fa-play"></i></div></a><div style="position:absolute;bottom:0;width:100%;background:rgba(0,0,0,0.8);padding:10px; display:flex; justify-content:space-between;"><span style="font-size:0.8rem;color:var(--gold);text-transform:uppercase;">${v.t}</span>${teoState?`<button onclick="nuke('teo_v','v',${i})" style="color:red;background:none;border:none;cursor:pointer;font-weight:bold;">DELETE</button>`:''}</div></div>`).join('');
+};
+</script>
 
-        function saveVid() {
-            const fullUrl = document.getElementById('vidFullUrl').value;
-            const title = document.getElementById('vidTitle').value;
-            const id = getYTID(fullUrl);
-            
-            if(id) { 
-                vData.unshift({id, t: title}); 
-                update('teo_v', vData); 
-            } else {
-                alert("Invalid YouTube Link. Please try again.");
-            }
-        }
-
-        function nuke(key, type, idx) {
-            if(confirm("Confirm Removal?")) {
-                if(type==='p') pData.splice(idx, 1); else vData.splice(idx,1);
-                update(key, type==='p' ? pData : vData);
-            }
-        }
-
-        function update(k, d) { localStorage.setItem(k, JSON.stringify(d)); location.reload(); }
-
-        window.onload = () => {
-            if(teoState) {
-                document.getElementById('photoAdmin').style.display = 'block';
-                document.getElementById('vidAdmin').style.display = 'block';
-                document.getElementById('gateIcon').className = "fas fa-lock-open";
-            }
-
-            document.getElementById('photoWrap').innerHTML = pData.map((p, i) => `
-                <div class="ultra-item">
-                    <img src="${p}">
-                    ${teoState ? `<button onclick="nuke('teo_p','p',${i})" style="position:absolute;top:10px;right:10px;background:red;color:white;border:none;padding:5px;cursor:pointer;">DELETE</button>` : ''}
-                </div>
-            `).join('');
-
-            // Renders videos as high-quality thumbnails
-            document.getElementById('vidWrap').innerHTML = vData.map((v, i) => `
-                <div class="ultra-item">
-                    <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank">
-                        <img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg" alt="${v.t}">
-                        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white; font-size:3rem; opacity:0.7;">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </a>
-                    <div style="position:absolute; bottom:0; width:100%; background:rgba(0,0,0,0.8); padding:15px; display:flex; justify-content:space-between;">
-                        <span style="font-size:0.7rem; letter-spacing:2px; color:var(--gold); text-transform:uppercase;">${v.t}</span>
-                        ${teoState ? `<button onclick="nuke('teo_v','v',${i})" style="color:red; background:none; border:none; cursor:pointer; font-weight:bold;">DELETE</button>` : ''}
-                    </div>
-                </div>
-            `).join('');
-        };
-    </script>
 </body>
 </html>
